@@ -22,6 +22,10 @@ resource "aws_cloudfront_origin_access_control" "this" {
   origin_access_control_origin_type = each.value["origin_type"]
   signing_behavior                  = each.value["signing_behavior"]
   signing_protocol                  = each.value["signing_protocol"]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_cloudfront_distribution" "this" {
